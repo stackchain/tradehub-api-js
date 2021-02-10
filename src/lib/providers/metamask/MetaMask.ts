@@ -81,6 +81,11 @@ export class MetaMask {
     return this.provider
   }
 
+  async getSigner(): Promise<ethers.Signer> {
+    const ethereum = await this.getConnectedAPI()
+    return new ethers.providers.Web3Provider(ethereum).getSigner()
+  }
+
   async getConnectedAPI(): Promise<MetaMaskAPI> {
     if (this.metamaskAPI && this.metamaskAPI.isConnected()) {
       return this.metamaskAPI
